@@ -20,14 +20,16 @@ RUN sudo chown -R admin:admin /home/admin
 RUN curl -L https://nixos.org/nix/install | sh
 RUN . /home/admin/.nix-profile/etc/profile.d/nix.sh >> .profile
 
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nix/store/rn9899jk59ckr4fkvxiax8abmb53kf53-nix-2.3.12/bin:/nix/store/hrpvwkjz04s9i4nmli843hyw9z4pwhww-bash-4.4-p23/
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nix/store/jhbxh1jwjc3hjhzs9y2hifdn0rmnfwaj-nix-2.3.15/bin:/nix/store/xvvgw9sb8wk6d2c0j3ybn7sll67s3s4z-bash-4.4-p23/
 
 RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && nix-channel --update && nix-env -iA nixpkgs.gnugrep nixpkgs.findutils
 ENV NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/tags/21.05.tar.gz
 ENV USER=admin
 RUN curl https://dapp.tools/install | sh
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nix/store/rn9899jk59ckr4fkvxiax8abmb53kf53-nix-2.3.12/bin:/nix/store/hrpvwkjz04s9i4nmli843hyw9z4pwhww-bash-4.4-p23/bin:/nix/store/i1zpawiplg4mkpzw73sqy7bqx13r6x5m-dapp-0.32.2/bin:/nix/store/gwgglkm2fhyq55bil7fibfj270rfdmhk-seth-0.10.1/bin:/nix/store/5pkbm23iwg9lf4kwq39x63n2ymlhw3f6-hevm-0.46.0/bin
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nix/store/jhbxh1jwjc3hjhzs9y2hifdn0rmnfwaj-nix-2.3.15/bin:/nix/store/xvvgw9sb8wk6d2c0j3ybn7sll67s3s4z-bash-4.4-p23/bin:/nix/store/0g5glbq80jlqivddgv6hjqxyky93l6q7-dapp-0.34.0/bin:/nix/store/c02vzqpc85nkwj0iwirgyvr0ls3g5jl3-seth-0.10.1/bin:/nix/store/xqb54p9vskabw9fl336gp4byair7vw57-hevm-0.48.0/bin
 
 RUN curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
-RUN nix-env -f https://github.com/dapphub/dapptools/archive/master.tar.gz -iA solc-static-versions.solc_0_6_11
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nix/store/rn9899jk59ckr4fkvxiax8abmb53kf53-nix-2.3.12/bin:/nix/store/hrpvwkjz04s9i4nmli843hyw9z4pwhww-bash-4.4-p23/bin:/nix/store/i1zpawiplg4mkpzw73sqy7bqx13r6x5m-dapp-0.32.2/bin:/nix/store/gwgglkm2fhyq55bil7fibfj270rfdmhk-seth-0.10.1/bin:/nix/store/5pkbm23iwg9lf4kwq39x63n2ymlhw3f6-hevm-0.46.0/bin:/nix/store/9r8xx2bsmg3p5yhrk9badb6q54fy4z5m-solc-static-0.6.11/bin
+RUN nix-env -f https://github.com/dapphub/dapptools/archive/master.tar.gz -iA solc-static-versions.solc_0_8_6
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nix/store/jhbxh1jwjc3hjhzs9y2hifdn0rmnfwaj-nix-2.3.15/bin:/nix/store/xvvgw9sb8wk6d2c0j3ybn7sll67s3s4z-bash-4.4-p23/bin:/nix/store/0g5glbq80jlqivddgv6hjqxyky93l6q7-dapp-0.34.0/bin:/nix/store/c02vzqpc85nkwj0iwirgyvr0ls3g5jl3-seth-0.10.1/bin:/nix/store/xqb54p9vskabw9fl336gp4byair7vw57-hevm-0.48.0/bin:/nix/store/4ps62x4vg3pnnvfq0pb3rm8v0jy80bw6-solc-static-0.8.6/bin
+RUN touch .bashrc
+RUN echo 'alias solc=solc-0.8.6' >> .bashrc
